@@ -1,0 +1,7 @@
+{
+  "type": "module",
+  
+  "dependencies": {
+    "webmidi": "^3.0.3"
+  }
+}
