@@ -54,6 +54,7 @@ type KeyboardProps = {
   activeKeys: number[];
   correctKeys: number[];
   width: number;
+  height: number;
 };
 
 export function Keyboard({
@@ -61,6 +62,7 @@ export function Keyboard({
   activeKeys,
   correctKeys,
   width,
+  height,
 }: KeyboardProps) {
   const midiRange: number[] = Array(range.last - range.first + 1)
     .fill(Number)
@@ -110,8 +112,8 @@ export function Keyboard({
     (midiNumber) => !Midi.midiToNoteName(midiNumber).includes("b")
   ).length;
 
-  const naturalKeyWidth = (width / numberOfNaturalKeys) * 0.9;
-  const naturalKeyHeight = naturalKeyWidth / (24 / 100);
+  const naturalKeyWidth = width / numberOfNaturalKeys;
+  const naturalKeyHeight = height;
   const sharpKeyWidth = naturalKeyWidth * (30 / 48);
   const sharpKeyHeight = naturalKeyHeight / 2;
 

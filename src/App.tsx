@@ -9,7 +9,7 @@ import "./App.css";
 import { Display } from "./display/display";
 
 function App() {
-  const { width } = useWindowSizeWatcher();
+  const { width, height } = useWindowSizeWatcher();
 
   const [validationFailed, setValidationFailed] = useState(false);
   const { activeNotes } = useWebMidi();
@@ -26,7 +26,8 @@ function App() {
     <>
       <Display question={question} score={score} />
       <Keyboard
-        width={width}
+        width={width * 0.9}
+        height={height * 0.5 * 0.9}
         range={noteRange}
         activeKeys={[...activeNotes]}
         correctKeys={question}
