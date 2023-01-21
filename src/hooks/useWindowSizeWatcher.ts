@@ -5,7 +5,10 @@ import { useState, useEffect } from "react";
  * @param delay the amount of time to wait before returning the height and width (defaults to 1/2 second)
  * @returns the height and width of the window.
  */
-function useWindowSizeWatcher(delay = 50): { height: number; width: number } {
+export function useWindowSizeWatcher(delay = 50): {
+  height: number;
+  width: number;
+} {
   const [dimensions, setDimensions] = useState({
     height: window.innerHeight,
     width: window.innerWidth,
@@ -38,5 +41,3 @@ function useWindowSizeWatcher(delay = 50): { height: number; width: number } {
 
   return dimensions;
 }
-
-export default useWindowSizeWatcher;

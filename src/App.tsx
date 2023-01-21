@@ -1,12 +1,12 @@
-import { Keyboard } from "./keyboard/keyboard";
-//@ts-ignore
-import useWindowSizeWatcher from "./hooks/useWindowSizeWatcher";
+import { useEffect, useState } from "react";
+import "./App.css";
+
+import { useWindowSizeWatcher } from "./hooks/useWindowSizeWatcher";
 import { useWebMidi } from "./hooks/useWebMidi";
 import { useExercise } from "./hooks/useExercise";
 
-import { useEffect, useState } from "react";
-import "./App.css";
 import { Display } from "./display/display";
+import { Keyboard } from "./keyboard/keyboard";
 
 function App() {
   const { width, height } = useWindowSizeWatcher();
@@ -14,7 +14,7 @@ function App() {
   const [validationFailed, setValidationFailed] = useState(false);
   const { activeNotes } = useWebMidi();
 
-  const { validate, question, score } = useExercise("NOTE");
+  const { validate, hint, score, correctKeys } = useExercise("INTERVAL");
 
   useEffect(() => {
     setValidationFailed(validate(activeNotes) || false);
@@ -24,13 +24,13 @@ function App() {
 
   return (
     <>
-      <Display question={question} score={score} />
+      <Display hint={hint} score={score} />
       <Keyboard
         width={width * 0.9}
         height={height * 0.5 * 0.9}
         range={noteRange}
         activeKeys={[...activeNotes]}
-        correctKeys={question}
+        correctKeys={[...correctKeys]}
       />
     </>
   );

@@ -34,15 +34,11 @@ export function GranimKey(props: GranimKeyProps) {
   }, []);
 
   useEffect(() => {
-    if (granimInstance && props.emphasize) {
-      granimInstance.changeState("emphasize");
-      granimInstance.play();
-    }
-  });
-
-  useEffect(() => {
     if (granimInstance) {
-      if (props.active) {
+      if (props.emphasize) {
+        granimInstance.changeState("emphasize");
+        granimInstance.play();
+      } else if (props.active) {
         granimInstance.changeState("active");
         granimInstance.play();
       } else {
@@ -50,7 +46,7 @@ export function GranimKey(props: GranimKeyProps) {
         granimInstance.pause();
       }
     }
-  }, [props.active]);
+  }, [props.active, props.emphasize]);
 
   return (
     <canvas
