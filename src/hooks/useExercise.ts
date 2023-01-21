@@ -32,7 +32,10 @@ export const useExercise = (exercise: "NOTE" | "INTERVAL") => {
         const top = 72;
         const note1 = randomIntFromInterval(bottom, top);
         const note2 = randomIntFromInterval(
-          note1 + 1,
+          // make sure root isn't top most note on keyboard
+          note1 + 1 > top ? top - 1 : note1 + 1,
+
+          // make sure interval doesn't exceed keyboard
           note1 + 12 > top ? top : note1 + 12
         );
 
@@ -66,7 +69,7 @@ export const useExercise = (exercise: "NOTE" | "INTERVAL") => {
       if (Array.isArray(answer) && !answer.length) {
         // incomplete answer input
         return null;
-      } else if (Array.isArray(answer) && question.length > answer.length) {
+      } else if (Array.isArray(answer) && answer.length < question.length) {
         // prevent validation on initial render before there's any input
         return null;
       } else if (question.length > 1) {
